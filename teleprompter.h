@@ -1,0 +1,4 @@
+#ifndef TELEPROMPTER_H
+#define TELEPROMPTER_H
+
+#endif // TELEPROMPTER_H
