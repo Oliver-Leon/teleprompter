@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QStringList>
-#include <QTimer>
+
 
 class Teleprompter : public QWidget {
     Q_OBJECT // 必须包含此宏，以便支持信号和槽机制
