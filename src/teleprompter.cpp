@@ -17,7 +17,6 @@ Teleprompter::Teleprompter(QWidget *parent) : QWidget(parent)
 
     scrollSpeed = 1000;
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, QOverload<>::of(&QObject::deleteLater));
     connect(timer, &QTimer::timeout, this, &Teleprompter::updateText);
     timer->start(scrollSpeed);
 
@@ -37,6 +36,14 @@ Teleprompter::Teleprompter(QWidget *parent) : QWidget(parent)
     speedSlider->setValue(scrollSpeed);
     connect(speedSlider, &QSlider::valueChanged, this, &Teleprompter::setSpeed);
     layout->addWidget(speedSlider);
+}
+
+Teleprompter::~Teleprompter() {
+    if (timer) {
+        timer->stop();
+        disconnect(timer, nullptr, nullptr, nullptr); // 断开所有信号连接
+        delete timer;
+    }
 }
 
 void Teleprompter::updateText()
