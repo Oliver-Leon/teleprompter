@@ -1,5 +1,5 @@
 # Intelligent stealth teleprompter
-只能隐身提词器
+智能隐身提词器
 # 基本说明
 - 基于Qt6-MSVC开发（可使用MinGW）
 - 最低C++标准：C++11
