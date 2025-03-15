@@ -1,5 +1,5 @@
-# OnlineCourseAssistant
-网课助手，一些提词小功能，开发中
+# Intelligent stealth teleprompter
+只能隐身提词器
 # 基本说明
 - 基于Qt6-MSVC开发（可使用MinGW）
 - 最低C++标准：C++11
@@ -15,6 +15,3 @@
 - 拖拽txt文件添加文本
 - 窗口透明度调整
 - 字体大小调整
-# 联系方式
-bilibili：https://space.bilibili.com/1843315943?spm_id_from=333.1007.0.0
-邮箱：a1840025658@outlook.com
