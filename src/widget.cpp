@@ -26,6 +26,7 @@ Widget::Widget(QWidget *parent)
     connect(ui->pushButton_stop, &QPushButton::clicked, this, &Widget::stopRolling);
     connect(ui->pushButton_increaseSpeed, &QPushButton::clicked, this, &Widget::increaseSpeed);
     connect(ui->pushButton_decreaseSpeed, &QPushButton::clicked, this, &Widget::decreaseSpeed);
+    connect(ui->pushButton_highlight, &QPushButton::clicked, this, &Widget::highlightSelectedText);
 }
 
 Widget::~Widget()
@@ -91,3 +92,16 @@ void Widget::decreaseSpeed()
     timer->setInterval(speed);
 }
 
+void Widget::highlightSelectedText()
+{
+    QTextCursor cursor = ui->textEdit->textCursor(); // 获取当前光标
+    if (cursor.hasSelection()) // 如果有选中的文本
+    {
+        QString selectedText = cursor.selectedText(); // 获取选中的文本
+        QString highlightedText = QString("<span style='background-color: yellow;'>%1</span>")
+                                      .arg(selectedText); // 创建高亮的 HTML 格式文本
+
+        // 替换选中的文本为高亮格式
+        cursor.insertHtml(highlightedText);
+    }
+}

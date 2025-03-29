@@ -145,6 +145,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="pushButton_highlight">
+     <property name="text">
+      <string>高亮</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="minimumSize">
       <size>

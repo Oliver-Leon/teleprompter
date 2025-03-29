@@ -36,6 +36,7 @@ public:
     QSpinBox *font_size;
     QLabel *label;
     QSpinBox *transparent;
+    QPushButton *pushButton_highlight;
     QGroupBox *groupBox_2;
     QPushButton *pushButton_start;
     QPushButton *pushButton_stop;
@@ -108,6 +109,11 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
+        pushButton_highlight = new QPushButton(Widget);
+        pushButton_highlight->setObjectName("pushButton_highlight");
+
+        verticalLayout->addWidget(pushButton_highlight);
+
         groupBox_2 = new QGroupBox(Widget);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setMinimumSize(QSize(0, 40));
@@ -148,6 +154,7 @@ public:
         win_capture->setText(QCoreApplication::translate("Widget", "\347\246\201\346\255\242\346\215\225\350\216\267", nullptr));
         label_2->setText(QCoreApplication::translate("Widget", "\345\255\227\344\275\223\345\244\247\345\260\217:", nullptr));
         label->setText(QCoreApplication::translate("Widget", "\351\200\217\346\230\216\345\272\246:", nullptr));
+        pushButton_highlight->setText(QCoreApplication::translate("Widget", "\351\253\230\344\272\256", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("Widget", "\346\273\232\350\257\215\350\256\276\347\275\256", nullptr));
         pushButton_start->setText(QCoreApplication::translate("Widget", "\345\274\200\345\247\213\346\273\232\350\257\215", nullptr));
         pushButton_stop->setText(QCoreApplication::translate("Widget", "\345\201\234\346\255\242\346\273\232\350\257\215", nullptr));

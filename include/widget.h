@@ -34,6 +34,7 @@ public slots:
     void stopRolling();
     void increaseSpeed();
     void decreaseSpeed();
+    void highlightSelectedText();
 
 private:
     Ui::Widget *ui;
