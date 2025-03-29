@@ -27,6 +27,12 @@ Widget::Widget(QWidget *parent)
     connect(ui->pushButton_increaseSpeed, &QPushButton::clicked, this, &Widget::increaseSpeed);
     connect(ui->pushButton_decreaseSpeed, &QPushButton::clicked, this, &Widget::decreaseSpeed);
     connect(ui->pushButton_highlight, &QPushButton::clicked, this, &Widget::highlightSelectedText);
+    connect(ui->pushButton_search, &QPushButton::clicked, this, &Widget::searchText);
+    connect(ui->pushButton_clearHighlight, &QPushButton::clicked, this, &Widget::clearHighlights);
+
+    // 初始化透明度和字体大小
+    ui->transparent->setValue(100);
+    ui->font_size->setValue(12);
 }
 
 Widget::~Widget()
@@ -94,14 +100,81 @@ void Widget::decreaseSpeed()
 
 void Widget::highlightSelectedText()
 {
-    QTextCursor cursor = ui->textEdit->textCursor(); // 获取当前光标
+    QTextCursor cursor = ui->textEdit->textCursor();
     if (cursor.hasSelection()) // 如果有选中的文本
     {
-        QString selectedText = cursor.selectedText(); // 获取选中的文本
-        QString highlightedText = QString("<span style='background-color: yellow;'>%1</span>")
-                                      .arg(selectedText); // 创建高亮的 HTML 格式文本
+        // 获取当前选中文本的格式
+        QTextCharFormat originalFormat = cursor.charFormat();
+        QFont currentFont = originalFormat.font();
+        qreal fontSize = currentFont.pointSizeF(); // 获取当前字体大小
 
-        // 替换选中的文本为高亮格式
-        cursor.insertHtml(highlightedText);
+        // 创建新的格式并保留字体大小
+        QTextCharFormat format;
+        format.setFont(currentFont); // 保留原有字体
+        format.setFontPointSize(fontSize); // 显式设置字体大小
+        format.setBackground(Qt::yellow); // 设置背景颜色为黄色
+
+        // 应用新的格式
+        cursor.mergeCharFormat(format);
     }
+}
+
+void Widget::searchText()
+{
+    QString keyword = ui->lineEdit_search->text();
+    if (keyword.isEmpty())
+        return;
+
+    QTextDocument *document = ui->textEdit->document();
+    QTextCursor cursor(document);
+
+    clearHighlights();
+
+    cursor.movePosition(QTextCursor::Start);
+
+    bool found = false;
+    while (!cursor.isNull() && !cursor.atEnd())
+    {
+        cursor = document->find(keyword, cursor, QTextDocument::FindCaseSensitively);
+        if (!cursor.isNull())
+        {
+            found = true;
+            // 传递匹配的起始位置而非结束位置
+            highlightSearchResult(cursor.selectionStart(), keyword.length());
+            cursor.movePosition(QTextCursor::Right); // 移动到下一个字符继续搜索
+        }
+    }
+
+    if (!found)
+    {
+        QMessageBox::information(this, "搜索结果", "未找到关键词！");
+    }
+}
+
+void Widget::highlightSearchResult(int startPos, int length)
+{
+    QTextCursor cursor(ui->textEdit->document());
+    cursor.setPosition(startPos); // 定位到起始位置
+    cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, length); // 选择指定长度的文本
+
+    QTextCharFormat format;
+    format.setBackground(Qt::green);
+    cursor.mergeCharFormat(format);
+}
+
+void Widget::clearHighlights()
+{
+    QTextDocument *document = ui->textEdit->document(); // 获取文档对象
+    QTextCursor cursor(document);                      // 创建光标对象
+
+    // 移动光标到文档开头，并选择整个文档
+    cursor.movePosition(QTextCursor::Start);
+    cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+
+    // 获取当前格式
+    QTextCharFormat format = cursor.charFormat();
+
+    // 清除背景颜色
+    format.clearBackground();
+    cursor.setCharFormat(format);
 }

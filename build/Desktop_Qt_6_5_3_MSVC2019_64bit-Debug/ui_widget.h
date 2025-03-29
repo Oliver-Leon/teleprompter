@@ -15,6 +15,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
@@ -36,7 +37,11 @@ public:
     QSpinBox *font_size;
     QLabel *label;
     QSpinBox *transparent;
+    QGroupBox *groupBox_3;
     QPushButton *pushButton_highlight;
+    QPushButton *pushButton_clearHighlight;
+    QLineEdit *lineEdit_search;
+    QPushButton *pushButton_search;
     QGroupBox *groupBox_2;
     QPushButton *pushButton_start;
     QPushButton *pushButton_stop;
@@ -109,10 +114,31 @@ public:
 
         verticalLayout->addWidget(groupBox);
 
-        pushButton_highlight = new QPushButton(Widget);
+        groupBox_3 = new QGroupBox(Widget);
+        groupBox_3->setObjectName("groupBox_3");
+        groupBox_3->setMinimumSize(QSize(0, 70));
+        pushButton_highlight = new QPushButton(groupBox_3);
         pushButton_highlight->setObjectName("pushButton_highlight");
+        pushButton_highlight->setGeometry(QRect(10, 20, 250, 20));
+        pushButton_highlight->setMinimumSize(QSize(0, 20));
+        pushButton_highlight->setMaximumSize(QSize(250, 20));
+        pushButton_clearHighlight = new QPushButton(groupBox_3);
+        pushButton_clearHighlight->setObjectName("pushButton_clearHighlight");
+        pushButton_clearHighlight->setGeometry(QRect(290, 20, 300, 20));
+        pushButton_clearHighlight->setMinimumSize(QSize(0, 20));
+        pushButton_clearHighlight->setMaximumSize(QSize(300, 20));
+        lineEdit_search = new QLineEdit(groupBox_3);
+        lineEdit_search->setObjectName("lineEdit_search");
+        lineEdit_search->setGeometry(QRect(80, 50, 300, 20));
+        lineEdit_search->setMinimumSize(QSize(300, 20));
+        lineEdit_search->setMaximumSize(QSize(300, 20));
+        pushButton_search = new QPushButton(groupBox_3);
+        pushButton_search->setObjectName("pushButton_search");
+        pushButton_search->setGeometry(QRect(20, 50, 50, 20));
+        pushButton_search->setMinimumSize(QSize(0, 20));
+        pushButton_search->setMaximumSize(QSize(50, 20));
 
-        verticalLayout->addWidget(pushButton_highlight);
+        verticalLayout->addWidget(groupBox_3);
 
         groupBox_2 = new QGroupBox(Widget);
         groupBox_2->setObjectName("groupBox_2");
@@ -154,7 +180,10 @@ public:
         win_capture->setText(QCoreApplication::translate("Widget", "\347\246\201\346\255\242\346\215\225\350\216\267", nullptr));
         label_2->setText(QCoreApplication::translate("Widget", "\345\255\227\344\275\223\345\244\247\345\260\217:", nullptr));
         label->setText(QCoreApplication::translate("Widget", "\351\200\217\346\230\216\345\272\246:", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("Widget", "\350\256\276\347\275\256\351\253\230\344\272\256", nullptr));
         pushButton_highlight->setText(QCoreApplication::translate("Widget", "\351\253\230\344\272\256", nullptr));
+        pushButton_clearHighlight->setText(QCoreApplication::translate("Widget", "\346\270\205\351\231\244\351\253\230\344\272\256", nullptr));
+        pushButton_search->setText(QCoreApplication::translate("Widget", "\346\220\234\347\264\242", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("Widget", "\346\273\232\350\257\215\350\256\276\347\275\256", nullptr));
         pushButton_start->setText(QCoreApplication::translate("Widget", "\345\274\200\345\247\213\346\273\232\350\257\215", nullptr));
         pushButton_stop->setText(QCoreApplication::translate("Widget", "\345\201\234\346\255\242\346\273\232\350\257\215", nullptr));

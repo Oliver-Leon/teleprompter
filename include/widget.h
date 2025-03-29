@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QStringList>
 #include <QPushButton>
+#include <QLineEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -35,6 +36,8 @@ public slots:
     void increaseSpeed();
     void decreaseSpeed();
     void highlightSelectedText();
+    void searchText();
+    void clearHighlights();
 
 private:
     Ui::Widget *ui;
@@ -45,5 +48,8 @@ private:
     int speed;
     bool isRollingPaused;
     bool isFinished;
+
+    void highlightSearchResult(int position, int length);
+
 };
 #endif // WIDGET_H
